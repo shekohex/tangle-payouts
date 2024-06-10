@@ -26,5 +26,5 @@ deno run -A main.ts --help
 ## Example
 
 ```bash
-deno run -A main.ts tgD9wRg4oaSwzZjFjM32cHM7BM9YgDeKnyDhQMYaCpe2eRmPV --rpc wss://rpc.tangle.tools --from-era 0 --to-era 100
+deno run -A main.ts tgD9wRg4oaSwzZjFjM32cHM7BM9YgDeKnyDhQMYaCpe2eRmPV --from-era 0 --to-era 100
 ```
