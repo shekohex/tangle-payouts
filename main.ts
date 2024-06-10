@@ -32,7 +32,12 @@ await new Command()
   .version("0.1.0")
   .description("Simple CLI to payouts on tangle network")
   .type("account", new AccountType())
-  .option("--rpc <rpc:string>", "RPC Url (must support dryRuns).")
+  .env("RPC=<value:string>", "RPC Websocket URL (must support dryRuns calls)", {
+    required: true,
+  })
+  .env("SIGNER_KEY=<value:string>", "Signer Mnemonic Phrase", {
+    required: true,
+  })
   .option("-f, --from-era <era:number>", "From which era.", {
     default: 0,
   })
@@ -41,20 +46,15 @@ await new Command()
   })
   .arguments("<stash:account>")
   .action(async (options, ...args) => {
-    let { fromEra, toEra, rpc } = options;
+    let { fromEra, toEra, rpc, signerKey } = options;
     const provider = new WsProvider(rpc);
     const api = await ApiPromise.create({ provider, noInitWarn: true });
     console.log(`connecting to ${rpc}`);
     await api.isReady;
     console.log(`API connected to ${rpc}`);
-    // READ the signer SURI from the environment
-    const signer = Deno.env.get("SIGNER_KEY");
-    if (!signer) {
-      throw new ValidationError("SIGNER_KEY environment variable is not set.");
-    }
     const [stash] = args;
     const keyring = new Keyring({ type: "sr25519" });
-    const signerPair = keyring.addFromUri(signer);
+    const signerPair = keyring.addFromUri(signerKey);
     const signerAddress = signerPair.address;
     console.log(`Signer address: ${signerAddress}`);
     // Check if the signer has enough balance

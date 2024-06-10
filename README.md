@@ -1,6 +1,7 @@
 # tangle-payouts
 
-A Simple script that will do a batch call of all of the eras in a range and payout the rewards to the stash account.
+A Simple script that will do a batch call of all of the eras in a range and
+payout the rewards to the stash account.
 
 ## Installation
 
@@ -12,8 +13,9 @@ A Simple script that will do a batch call of all of the eras in a range and payo
 cp .env.example .env
 ```
 
-4. Edit the .env file with your SURI, this account does not need to be the validator account, it can be any account that has some TNT to pay 
-for the transaction fees.
+4. Edit the .env file with your SURI, this account does not need to be the
+   validator account, it can be any account that has some TNT to pay for the
+   transaction fees.
 
 ## Usage
 
